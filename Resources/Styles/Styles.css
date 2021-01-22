@@ -37,16 +37,21 @@ body {
   color: var(--primaryColor__lightTheme);
   flex-flow: column nowrap;
 }
+form, form *{
+  transition: width 1s ease 0s;
+}
 form {
   flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 1rem 0;
+  width: 50%;
 }
 form > label {
   font-size: 4rem;
   margin-bottom: 2rem;
+  word-wrap: break-word;
 }
 form > input {
   padding: 0.75rem 2rem;
@@ -142,4 +147,9 @@ form > button[data-dark-theme="on"] {
   color: var(--primaryColor__lightTheme);
   border: 0.2rem solid var(--primaryColor__lightTheme);
   background-color: var(--secondaryColor__lightTheme);
+}
+@media (max-width: 600px){
+  form{
+    width: 100%;
+  }
 }

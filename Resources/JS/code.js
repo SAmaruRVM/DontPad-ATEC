@@ -32,17 +32,21 @@ noteText?.addEventListener("keydown", function (e) {
 });
 document.querySelector("form")?.addEventListener("submit", function (e) {
   e.preventDefault();
-  window.location.href = `index.php?note=${this.querySelector("input").value}`;
+  if (this.querySelector("input").value.trim().length > 0)
+    window.location.href = `index.php?note=${
+      this.querySelector("input").value
+    }`;
 });
-
-setInterval(() => {
-  const formData = new FormData();
-  formData.append("id", window.document.title.split("|")[0].trim());
-  formData.append("note", noteText.value);
-  fetch("validations.php?update=yes", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.text())
-    .then((response) => (noteText.value = response));
-}, 2000);
+if (new URLSearchParams().has("note")) {
+  setInterval(() => {
+    const formData = new FormData();
+    formData.append("id", window.document.title.split("|")[0].trim());
+    formData.append("note", noteText.value);
+    fetch("validations.php?update=yes", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.text())
+      .then((response) => (noteText.value = response));
+  }, 2000);
+}

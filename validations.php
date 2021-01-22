@@ -8,5 +8,5 @@
     if (isset($_GET['update']) && strcasecmp($_GET['update'], "yes") === 0) {
         echo $note->getNoteContent();
     } else {
-        $note->updateNote($_POST['note']);
+        $note->updateNote(htmlentities($_POST['note']));
     }

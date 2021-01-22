@@ -9,8 +9,8 @@
                     $note->insertNote($note->getIndentifier());
                 }
             ?>
-     <textarea id="note__text"
-         placeholder="Your note here..."><?= $noteExists ? $note->getNoteContent() : null?></textarea>
+     <textarea id="note__text" placeholder="Your note here..."
+         autofocus><?= $noteExists ? $note->getNoteContent() : null?></textarea>
      <?php else:?>
 
      <form action="" method="POST">
