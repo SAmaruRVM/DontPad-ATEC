@@ -33,7 +33,7 @@
                 $stmt = $this->connection->prepare("CALL spNote_GetById(?)");
                 $stmt->execute([$this->identifier]);
                 $note = $stmt->fetch(PDO::FETCH_OBJ);
-                return isset($note->text_note) ? $note->text_note : "";
+                return !empty(trim($note->text_note)) ? $note->text_note : "";
             } catch (Exception $e) {
                 header("Location: " . ERROR_PAGE);
             }

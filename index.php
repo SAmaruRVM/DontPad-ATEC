@@ -6,14 +6,14 @@
         if (isset($_GET['note'])):
                 $note = new Note(new Connection(), $_GET['note']);
                 if (!$noteExists = $note->checkIfExists()) {
-                    $note->insertNote($_GET['note']);
+                    $note->insertNote($note->getIndentifier());
                 }
             ?>
      <textarea id="note__text"
          placeholder="Your note here..."><?= $noteExists ? $note->getNoteContent() : null?></textarea>
      <?php else:?>
 
-     <form action="" method="GET">
+     <form action="" method="POST">
          <label for="urlNote">
              dontpadatec.com/note=?
          </label>

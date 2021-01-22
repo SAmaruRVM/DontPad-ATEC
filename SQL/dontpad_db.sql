@@ -3,8 +3,9 @@ CREATE DATABASE dontpad_db;
 USE dontpad_db;
 
 CREATE TABLE notes(
-    identifier_note VARCHAR(50) PRIMARY KEY NOT NULL UNIQUE,
-	text_note TEXT NULL
+    identifier_note VARCHAR(50) PRIMARY KEY UNIQUE NOT NULL,
+	text_note TEXT NULL,
+    created_datetime_note DATETIME DEFAULT (CURTIME()) NULL
 );
 
 DELIMITER !!
@@ -17,7 +18,7 @@ END!!
 DROP PROCEDURE IF EXISTS spNote_InsertNote!!
 CREATE PROCEDURE spNote_InsertNote(IN identifier VARCHAR(50))
 BEGIN
-	INSERT INTO notes VALUES (identifier, NULL);
+	INSERT INTO notes VALUES (identifier, NULL, CURTIME());
 END!!
 
 DROP PROCEDURE IF EXISTS spNote_UpdateNote!!
@@ -26,3 +27,4 @@ BEGIN
 	UPDATE notes AS n SET n.text_note = textNote WHERE n.identifier_note = identifier;
 END!!
 DELIMITER ;
+
